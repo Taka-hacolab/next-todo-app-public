@@ -15,10 +15,10 @@ export function Home() {
   const { todos, addTodo, toggleTodo, deleteTodo } = useTodoStore();
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-8 bg-background-light dark:bg-background-dark transition-colors">
-      <div className="w-full max-w-md p-6 bg-card-light dark:bg-card-dark rounded-lg shadow-md transition-colors">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-text-light dark:text-text-dark">ToDoアプリ</h1>
+    <main className="flex min-h-screen flex-col items-center p-4 sm:p-6 md:p-8 bg-background-light dark:bg-background-dark transition-colors">
+      <div className="w-full max-w-[95%] sm:max-w-md p-4 sm:p-6 bg-card-light dark:bg-card-dark rounded-lg shadow-md transition-colors">
+        <div className="flex justify-between items-center mb-4 sm:mb-6">
+          <h1 className="text-xl sm:text-2xl font-bold text-text-light dark:text-text-dark">ToDoアプリ</h1>
           <ThemeToggle />
         </div>
 
