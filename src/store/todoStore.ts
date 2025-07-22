@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { isLocalStorageAvailable } from '@/lib/clientUtils';
 
 export interface Todo {
   id: number;
@@ -51,6 +52,19 @@ export const useTodoStore = create<TodoState>()(
     }),
     {
       name: 'todo-storage', // ローカルストレージのキー名
+      storage: createJSONStorage(() => {
+        // クライアント側でのみローカルストレージを使用
+        if (isLocalStorageAvailable()) {
+          return localStorage;
+        }
+        // サーバー側ではメモリストレージを使用
+        return {
+          getItem: () => null,
+          setItem: () => {},
+          removeItem: () => {},
+        };
+      }),
+      partialize: (state) => ({ todos: state.todos }), // 永続化する状態の一部を指定
     }
   )
 );
